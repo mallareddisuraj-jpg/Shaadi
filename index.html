@@ -15,6 +15,16 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="locked">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="linen" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9 0.035" numOctaves="2" seed="3" result="h"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.035 0.9" numOctaves="2" seed="8" result="v"/>
+      <feBlend in="h" in2="v" mode="multiply" result="weave"/>
+      <feColorMatrix in="weave" type="saturate" values="0" result="g"/>
+      <feComponentTransfer in="g"><feFuncA type="table" tableValues="0 0.55"/></feComponentTransfer>
+      <feComposite in2="SourceGraphic" operator="in"/>
+    </filter>
+  </svg>
 
   <!-- Opening gate: the tap also starts the music (browsers need a tap before audio) -->
   <div class="gate" id="gate">
@@ -83,37 +93,59 @@
       </figure>
     </section>
 
-    <!-- 06 · Celebrations -->
-    <section class="events">
+    <!-- 06 · Celebrations: one panel per event, block-print pattern + linen cartouche -->
+    <section class="events-intro">
       <div class="art art--damask" aria-hidden="true"></div>
       <header class="events__head reveal">
         <p class="eyebrow">Two days of celebration</p>
         <h2 class="heading">The Celebrations</h2>
       </header>
-      <div class="events__grid">
-        <article class="event reveal">
+    </section>
+    <section class="event event--welcome">
+      <div class="art art--pattern-trellis" data-speed="0.9" aria-hidden="true"></div>
+      <div class="cartouche reveal">
+        <svg class="cartouche__shape" viewBox="0 0 300 420" aria-hidden="true"><path d="M150 4C170 26 200 36 232 38C246 39 252 48 252 60C266 62 276 72 276 86L276 180C276 194 286 202 296 210C286 218 276 226 276 240L276 334C276 348 266 358 252 360C252 372 246 381 232 382C200 384 170 394 150 416C130 394 100 384 68 382C54 381 48 372 48 360C34 358 24 348 24 334L24 240C24 226 14 218 4 210C14 202 24 194 24 180L24 86C24 72 34 62 48 60C48 48 54 39 68 38C100 36 130 26 150 4Z"/><path class="cartouche__weave" d="M150 4C170 26 200 36 232 38C246 39 252 48 252 60C266 62 276 72 276 86L276 180C276 194 286 202 296 210C286 218 276 226 276 240L276 334C276 348 266 358 252 360C252 372 246 381 232 382C200 384 170 394 150 416C130 394 100 384 68 382C54 381 48 372 48 360C34 358 24 348 24 334L24 240C24 226 14 218 4 210C14 202 24 194 24 180L24 86C24 72 34 62 48 60C48 48 54 39 68 38C100 36 130 26 150 4Z"/><path class="cartouche__edge" d="M150 4C170 26 200 36 232 38C246 39 252 48 252 60C266 62 276 72 276 86L276 180C276 194 286 202 296 210C286 218 276 226 276 240L276 334C276 348 266 358 252 360C252 372 246 381 232 382C200 384 170 394 150 416C130 394 100 384 68 382C54 381 48 372 48 360C34 358 24 348 24 334L24 240C24 226 14 218 4 210C14 202 24 194 24 180L24 86C24 72 34 62 48 60C48 48 54 39 68 38C100 36 130 26 150 4Z" transform="translate(150 210) scale(.94) translate(-150 -210)"/></svg>
+        <div class="cartouche__text">
           <p class="eyebrow">Friday · 26 February</p>
           <h3 class="event__name">Check-in &amp; High Tea</h3>
           <p class="eyebrow event__time">6:00 PM</p>
-        </article>
-        <article class="event reveal">
+        </div>
+      </div>
+    </section>
+    <section class="event event--dinner">
+      <div class="art art--pattern-dahlia" data-speed="0.9" aria-hidden="true"></div>
+      <div class="cartouche reveal">
+        <svg class="cartouche__shape" viewBox="0 0 300 420" aria-hidden="true"><path d="M150 4C170 26 200 36 232 38C246 39 252 48 252 60C266 62 276 72 276 86L276 180C276 194 286 202 296 210C286 218 276 226 276 240L276 334C276 348 266 358 252 360C252 372 246 381 232 382C200 384 170 394 150 416C130 394 100 384 68 382C54 381 48 372 48 360C34 358 24 348 24 334L24 240C24 226 14 218 4 210C14 202 24 194 24 180L24 86C24 72 34 62 48 60C48 48 54 39 68 38C100 36 130 26 150 4Z"/><path class="cartouche__weave" d="M150 4C170 26 200 36 232 38C246 39 252 48 252 60C266 62 276 72 276 86L276 180C276 194 286 202 296 210C286 218 276 226 276 240L276 334C276 348 266 358 252 360C252 372 246 381 232 382C200 384 170 394 150 416C130 394 100 384 68 382C54 381 48 372 48 360C34 358 24 348 24 334L24 240C24 226 14 218 4 210C14 202 24 194 24 180L24 86C24 72 34 62 48 60C48 48 54 39 68 38C100 36 130 26 150 4Z"/><path class="cartouche__edge" d="M150 4C170 26 200 36 232 38C246 39 252 48 252 60C266 62 276 72 276 86L276 180C276 194 286 202 296 210C286 218 276 226 276 240L276 334C276 348 266 358 252 360C252 372 246 381 232 382C200 384 170 394 150 416C130 394 100 384 68 382C54 381 48 372 48 360C34 358 24 348 24 334L24 240C24 226 14 218 4 210C14 202 24 194 24 180L24 86C24 72 34 62 48 60C48 48 54 39 68 38C100 36 130 26 150 4Z" transform="translate(150 210) scale(.94) translate(-150 -210)"/></svg>
+        <div class="cartouche__text">
           <p class="eyebrow">Friday · 26 February</p>
           <h3 class="event__name">Welcome Reception</h3>
           <p class="eyebrow event__time">7:00 PM onwards</p>
-          <p class="body">Followed by dinner</p>
-        </article>
-        <article class="event reveal">
+          <p class="event__note">Followed by dinner</p>
+        </div>
+      </div>
+    </section>
+    <section class="event event--haldi">
+      <div class="art art--pattern-marigold" data-speed="0.9" aria-hidden="true"></div>
+      <div class="cartouche reveal">
+        <svg class="cartouche__shape" viewBox="0 0 300 420" aria-hidden="true"><path d="M150 4C170 26 200 36 232 38C246 39 252 48 252 60C266 62 276 72 276 86L276 180C276 194 286 202 296 210C286 218 276 226 276 240L276 334C276 348 266 358 252 360C252 372 246 381 232 382C200 384 170 394 150 416C130 394 100 384 68 382C54 381 48 372 48 360C34 358 24 348 24 334L24 240C24 226 14 218 4 210C14 202 24 194 24 180L24 86C24 72 34 62 48 60C48 48 54 39 68 38C100 36 130 26 150 4Z"/><path class="cartouche__weave" d="M150 4C170 26 200 36 232 38C246 39 252 48 252 60C266 62 276 72 276 86L276 180C276 194 286 202 296 210C286 218 276 226 276 240L276 334C276 348 266 358 252 360C252 372 246 381 232 382C200 384 170 394 150 416C130 394 100 384 68 382C54 381 48 372 48 360C34 358 24 348 24 334L24 240C24 226 14 218 4 210C14 202 24 194 24 180L24 86C24 72 34 62 48 60C48 48 54 39 68 38C100 36 130 26 150 4Z"/><path class="cartouche__edge" d="M150 4C170 26 200 36 232 38C246 39 252 48 252 60C266 62 276 72 276 86L276 180C276 194 286 202 296 210C286 218 276 226 276 240L276 334C276 348 266 358 252 360C252 372 246 381 232 382C200 384 170 394 150 416C130 394 100 384 68 382C54 381 48 372 48 360C34 358 24 348 24 334L24 240C24 226 14 218 4 210C14 202 24 194 24 180L24 86C24 72 34 62 48 60C48 48 54 39 68 38C100 36 130 26 150 4Z" transform="translate(150 210) scale(.94) translate(-150 -210)"/></svg>
+        <div class="cartouche__text">
           <p class="eyebrow">Saturday · 27 February</p>
           <h3 class="event__name">Haldi</h3>
           <p class="eyebrow event__time">10:00 AM</p>
-          <p class="body">Followed by lunch</p>
-        </article>
-        <article class="event reveal">
+          <p class="event__note">Followed by lunch</p>
+        </div>
+      </div>
+    </section>
+    <section class="event event--wedding">
+      <div class="art art--pattern-lotus" data-speed="0.9" aria-hidden="true"></div>
+      <div class="cartouche reveal">
+        <svg class="cartouche__shape" viewBox="0 0 300 420" aria-hidden="true"><path d="M150 4C170 26 200 36 232 38C246 39 252 48 252 60C266 62 276 72 276 86L276 180C276 194 286 202 296 210C286 218 276 226 276 240L276 334C276 348 266 358 252 360C252 372 246 381 232 382C200 384 170 394 150 416C130 394 100 384 68 382C54 381 48 372 48 360C34 358 24 348 24 334L24 240C24 226 14 218 4 210C14 202 24 194 24 180L24 86C24 72 34 62 48 60C48 48 54 39 68 38C100 36 130 26 150 4Z"/><path class="cartouche__weave" d="M150 4C170 26 200 36 232 38C246 39 252 48 252 60C266 62 276 72 276 86L276 180C276 194 286 202 296 210C286 218 276 226 276 240L276 334C276 348 266 358 252 360C252 372 246 381 232 382C200 384 170 394 150 416C130 394 100 384 68 382C54 381 48 372 48 360C34 358 24 348 24 334L24 240C24 226 14 218 4 210C14 202 24 194 24 180L24 86C24 72 34 62 48 60C48 48 54 39 68 38C100 36 130 26 150 4Z"/><path class="cartouche__edge" d="M150 4C170 26 200 36 232 38C246 39 252 48 252 60C266 62 276 72 276 86L276 180C276 194 286 202 296 210C286 218 276 226 276 240L276 334C276 348 266 358 252 360C252 372 246 381 232 382C200 384 170 394 150 416C130 394 100 384 68 382C54 381 48 372 48 360C34 358 24 348 24 334L24 240C24 226 14 218 4 210C14 202 24 194 24 180L24 86C24 72 34 62 48 60C48 48 54 39 68 38C100 36 130 26 150 4Z" transform="translate(150 210) scale(.94) translate(-150 -210)"/></svg>
+        <div class="cartouche__text">
           <p class="eyebrow">Saturday · 27 February</p>
           <h3 class="event__name">Shubh Vivaah</h3>
           <p class="eyebrow event__time">4:30 PM onwards</p>
-          <p class="body">Followed by dinner</p>
-        </article>
+          <p class="event__note">Followed by dinner</p>
+        </div>
       </div>
     </section>
 
