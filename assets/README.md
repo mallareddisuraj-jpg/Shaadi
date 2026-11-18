@@ -22,3 +22,13 @@ Drop your files into this folder with exactly these names. Each section shows a 
 | `share.jpg` | Preview image shown when the link is shared on WhatsApp | 1200×630 |
 
 Keep JPGs under about 500 KB each so the invite opens quickly on phones.
+
+## What is here now
+
+Built from the two Canva designs (scene motifs, and the block-print patterns with linen cartouches):
+`sky.jpg`, `dome.png`, `palace.jpg`, `courtyard.jpg`, the four `pattern-*.jpg`, the four `cartouche-*.png`
+(maroon is tinted from the beige one), `carved-frame.png` (the jharokha arch), `arch-scene.jpg` (peacocks and
+lotus shown inside the arch until `couple.jpg` is added), `teal-paper.jpg`, `rose-texture.jpg` and `damask.jpg`
+(recoloured from the Canva watercolour wash and trellis), and `share.jpg`.
+
+Still to add: `couple.jpg`, `ganesh.png`, `music.mp3`.
