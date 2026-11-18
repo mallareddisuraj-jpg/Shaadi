@@ -94,7 +94,7 @@
       document.body.classList.remove("locked");
       window.scrollTo(0, 0);
       document.querySelectorAll(".scene--sky .reveal").forEach((el) => el.classList.add("in"));
-    }, reduceMotion ? 0 : 3100);
+    }, reduceMotion ? 0 : 5400);                     // the leaf is fully open at ~1.9s; the card then stays 3.5s
   };
   // Pull the thread: drag sideways or down; the cord follows the finger, a long enough pull opens it. A tap also works.
   let start = null;
