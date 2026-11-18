@@ -62,22 +62,39 @@
   probe.onload = () => { if (photo) { photo.hidden = false; photo.querySelectorAll(".reveal").forEach((el) => io.observe(el)); } };
   probe.src = "assets/couple.jpg";
 
-  /* ---------- Music: assets/music.mp3 (button hides itself if the file is missing) ---------- */
+  /* ---------- Music: a YouTube mix played through a hidden player, started by the guest's tap ---------- */
+  const VIDEO_ID = "VFqzggB5Isg";   // "Go To India // voices of kolkata" by MyRoadTunes
   const btn = document.getElementById("music");
   const label = btn.querySelector(".music__label");
-  const audio = new Audio("assets/music.mp3");
-  audio.loop = true; audio.preload = "auto"; audio.volume = 0.7;
-  let hasAudio = true;
-  audio.addEventListener("error", () => { hasAudio = false; btn.hidden = true; });
+  let player = null, ready = false, wantPlay = false;
   const setPlaying = (on) => {
     btn.classList.toggle("is-playing", on);
     btn.setAttribute("aria-pressed", String(on));
     label.textContent = on ? "Pause music" : "Play music";
   };
-  audio.addEventListener("play", () => setPlaying(true));
-  audio.addEventListener("pause", () => setPlaying(false));
-  const play = () => { if (hasAudio) audio.play().catch(() => {}); };
-  btn.addEventListener("click", () => (audio.paused ? play() : audio.pause()));
+  const play = () => {
+    wantPlay = true;
+    if (!ready) return;
+    try { player.unMute(); player.setVolume(60); player.playVideo(); } catch (e) {}
+  };
+  window.onYouTubeIframeAPIReady = () => {
+    player = new YT.Player("yt", {
+      width: "1", height: "1", videoId: VIDEO_ID, host: "https://www.youtube-nocookie.com",
+      playerVars: { playsinline: 1, controls: 0, loop: 1, playlist: VIDEO_ID, rel: 0 },
+      events: {
+        onReady: () => { ready = true; if (wantPlay) play(); },
+        onStateChange: (e) => setPlaying(e.data === YT.PlayerState.PLAYING || e.data === YT.PlayerState.BUFFERING),
+        onError: () => { btn.hidden = true; },
+      },
+    });
+  };
+  const yt = document.createElement("script");
+  yt.src = "https://www.youtube.com/iframe_api";
+  document.head.appendChild(yt);
+  btn.addEventListener("click", () => {
+    if (btn.classList.contains("is-playing")) { wantPlay = false; try { player.pauseVideo(); } catch (e) {} }
+    else play();
+  });
 
   /* ---------- Gate ---------- */
   const gate = document.getElementById("gate");

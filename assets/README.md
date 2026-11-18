@@ -18,7 +18,7 @@ Drop your files into this folder with exactly these names. Each section shows a 
 | `pattern-marigold.jpg` | Yellow block-print florals (Canva page 2), Haldi | 1200×1200 tile |
 | `pattern-lotus.jpg` | Pink lotus (Canva page 3), Shubh Vivaah | 1400×1400 tile |
 | `damask.jpg` | Seamless teal damask pattern | 1200×1200 |
-| `music.mp3` | Background song (MP3, ideally under 5 MB). The music button only appears once this file exists | — |
+| the music (it now plays the YouTube mix VFqzggB5Isg through a hidden player; see `js/main.js`) | Background song (MP3, ideally under 5 MB). The music button only appears once this file exists | — |
 | `share.jpg` | Preview image shown when the link is shared on WhatsApp | 1200×630 |
 
 Keep JPGs under about 500 KB each so the invite opens quickly on phones.
@@ -33,4 +33,4 @@ The `ev-*.webp` files are the same scenes with the page colour made transparent,
 `kolam.svg`, `kolam-maroon.svg`, `kolam-gold.svg` and `rangoli.svg` are drawn for this site: the faint pattern and rosettes on the coloured backgrounds.
 `teal-paper.jpg` and `rose-texture.jpg` are recoloured from the Canva watercolour wash.
 
-Still to add: `couple.jpg` (the photo section appears once it exists), `ganesh.png`, `music.mp3`.
+Still to add: `couple.jpg` (the photo section appears once it exists), `ganesh.png`, the music (it now plays the YouTube mix VFqzggB5Isg through a hidden player; see `js/main.js`).
