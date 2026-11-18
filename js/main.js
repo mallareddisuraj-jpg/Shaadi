@@ -81,14 +81,31 @@
 
   /* ---------- Gate ---------- */
   const gate = document.getElementById("gate");
-  document.getElementById("openInvite").addEventListener("click", () => {
+  const opener = document.getElementById("openInvite");
+  const band = document.querySelector(".cord__band");
+  let opened = false;
+  const openEnvelope = () => {
+    if (opened) return; opened = true;
     play();
-    gate.classList.add("is-opening");                 // ribbon slips off, flaps fold open, card grows
+    if (band) band.style.transform = "";
+    gate.classList.add("is-opening");                 // cord slides off, flaps open, card rises
     setTimeout(() => {
       gate.classList.add("is-open");                  // then the envelope fades into the cover
       document.body.classList.remove("locked");
       window.scrollTo(0, 0);
       document.querySelectorAll(".scene--sky .reveal").forEach((el) => el.classList.add("in"));
-    }, reduceMotion ? 0 : 2900);
+    }, reduceMotion ? 0 : 3100);
+  };
+  // Pull the thread: drag sideways or down; the cord follows the finger, a long enough pull opens it. A tap also works.
+  let start = null;
+  opener.addEventListener("pointerdown", (e) => { start = { x: e.clientX, y: e.clientY }; opener.setPointerCapture(e.pointerId); });
+  opener.addEventListener("pointermove", (e) => {
+    if (!start || opened) return;
+    const d = Math.max(Math.abs(e.clientX - start.x), e.clientY - start.y, 0);
+    if (band) band.style.transform = `translateX(${Math.min(d, 90) * 0.6}px)`;
+    if (d > 70) openEnvelope();
   });
+  const end = () => { if (start && !opened) openEnvelope(); start = null; };
+  opener.addEventListener("pointerup", end);
+  opener.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openEnvelope(); } });
 })();

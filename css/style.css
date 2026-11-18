@@ -73,46 +73,50 @@ section { position: relative; overflow: hidden; }
   50% { filter: blur(var(--b)) brightness(1.15); }
 }
 
-/* ---------- Gate: ribbon-tied envelope ---------- */
-.gate { position: fixed; inset: 0; z-index: 50; background: #1a2b44; transition: opacity 1s ease, visibility 1s; }
+/* ---------- Gate: banana-leaf envelope tied with gold cord ---------- */
+.gate { position: fixed; inset: 0; z-index: 50; background: #07120a; display: grid; place-items: center; transition: opacity 1s ease, visibility 1s; touch-action: none; }
 .gate.is-open { opacity: 0; visibility: hidden; }
-.env { position: absolute; inset: 0; perspective: 1500px; overflow: hidden; }
-.env__card { position: absolute; inset: 7% 8%; display: grid; place-content: center; gap: 16px; text-align: center; color: #6b1d28;
-  background: #f6efe0 url("../assets/kolam-maroon.svg") center / 120px; box-shadow: inset 0 0 0 1px rgba(122,31,43,.25), inset 0 0 0 7px #f6efe0, inset 0 0 0 8px rgba(122,31,43,.3);
-  transform: scale(.94); transition: transform 1.4s cubic-bezier(.2,.7,.2,1) .9s, opacity .9s ease 2.1s; }
-.env__card::before { content: ""; position: absolute; inset: 0; background: rgba(246,239,224,.9); z-index: -1; }
-.env__card { isolation: isolate; }
-.env__names { font-family: var(--serif); font-style: italic; font-size: clamp(46px, 12vw, 84px); line-height: 1.05; }
-.env__names span { font-size: .7em; }
-.env__flap { position: absolute; inset: 0; transition: transform 1.15s cubic-bezier(.55,.05,.35,1), opacity .5s ease; backface-visibility: hidden; filter: drop-shadow(0 0 2px rgba(60,25,0,.45)) drop-shadow(0 6px 10px rgba(60,25,0,.25)); }
-.env__flap i { position: absolute; inset: 0; background: url("../assets/envelope.jpg") center / cover no-repeat; }
-.env__flap--top i    { clip-path: polygon(0 0, 100% 0, 50% 54%); }
-.env__flap--bottom i { clip-path: polygon(0 100%, 100% 100%, 50% 46%); }
-.env__flap--left i   { clip-path: polygon(0 0, 53% 50%, 0 100%); }
-.env__flap--right i  { clip-path: polygon(100% 0, 47% 50%, 100% 100%); }
-.env__flap--top i::after, .env__flap--bottom i::after, .env__flap--left i::after, .env__flap--right i::after { content: ""; position: absolute; inset: 0; }
-.env__flap--top i::after    { background: linear-gradient(180deg, transparent 60%, rgba(80,30,0,.22)); }
-.env__flap--bottom i::after { background: linear-gradient(0deg, transparent 60%, rgba(80,30,0,.18)); }
-.env__flap--left i::after   { background: linear-gradient(90deg, transparent 60%, rgba(80,30,0,.16)); }
-.env__flap--right i::after  { background: linear-gradient(270deg, transparent 60%, rgba(80,30,0,.16)); }
-.env__flap--top { transform-origin: 50% 0; } .env__flap--bottom { transform-origin: 50% 100%; }
-.env__flap--left { transform-origin: 0 50%; } .env__flap--right { transform-origin: 100% 50%; }
-.env__ribbon { position: absolute; top: 0; bottom: 0; left: 50%; width: 30px; margin-left: -15px;
-  background: linear-gradient(90deg, #d6c39a, #fff9ec 35%, #f0e3c6 60%, #cdb98d); box-shadow: 0 0 6px rgba(70,40,0,.35);
-  transition: transform .7s cubic-bezier(.6,0,.4,1), opacity .7s; }
-.env__bow { position: absolute; left: 50%; top: 52%; width: min(220px, 56vw); transform: translate(-50%, -42%); filter: drop-shadow(0 6px 10px rgba(50,20,0,.35));
-  transition: transform .6s cubic-bezier(.5,0,.5,1), opacity .5s; }
-.env__open { position: absolute; inset: 0; z-index: 5; background: none; border: 0; color: #fff6e6; cursor: pointer; display: grid; align-items: end; justify-items: center; padding-bottom: calc(9vh + env(safe-area-inset-bottom)); font: inherit; }
-.env__open .eyebrow { padding: 10px 22px; border-radius: 999px; background: rgba(60,25,10,.55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); animation: breathe 1.6s ease-in-out infinite alternate; }
+.gate__leaves { position: absolute; inset: 0; background: url("../assets/leaves-bg.webp") center / cover; filter: brightness(.62) saturate(1.05); }
+.gate__leaves::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 55% at 50% 48%, rgba(0,0,0,.05), rgba(0,0,0,.55)); }
+.env { position: relative; width: min(84vw, 50vh, 460px); aspect-ratio: 300 / 420; perspective: 1400px; transform: translateY(-3vh);
+  filter: drop-shadow(0 26px 34px rgba(0,0,0,.6)); transition: transform 1.4s cubic-bezier(.3,.7,.2,1); }
+.env__part { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.env__card { position: absolute; left: 7%; right: 7%; top: 2%; height: 74%; border-radius: 3px; overflow: hidden; text-align: center; color: #6b1d28;
+  background: #f7f0df; box-shadow: 0 2px 8px rgba(0,0,0,.25); display: grid; align-content: start; justify-items: center; gap: 2px; padding-top: 17%;
+  transition: transform 1.3s cubic-bezier(.3,.7,.2,1), opacity .8s ease; }
+.env__jaali { position: absolute; left: 0; right: 0; top: 0; height: 25%; background: url("../assets/kolam-gold.svg") center / 52px;
+  -webkit-mask-image: radial-gradient(ellipse 34% 70% at 50% 100%, transparent 98%, #000 100%); mask-image: radial-gradient(ellipse 34% 70% at 50% 100%, transparent 98%, #000 100%); opacity: .9; }
+.env__jaali::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: linear-gradient(90deg, transparent, #c9a24a 20%, #c9a24a 80%, transparent); }
+.env__om { position: relative; font-family: var(--deva); font-size: clamp(20px, 5vw, 26px); color: #b8913a; }
+.env__names { position: relative; font-family: var(--serif); font-style: italic; font-size: clamp(30px, 8.6vw, 46px); line-height: 1.05; }
+.env__names span { font-size: .7em; color: #b8913a; }
+.env__card .eyebrow { position: relative; font-size: 10px; color: #8a6a2a; }
+.env__blessing { position: relative; margin-top: 16%; font-style: italic; font-size: clamp(14px, 3.8vw, 18px); line-height: 1.4; color: #5c4a2a; }
+.env__venue { margin-top: 8px; }
+.env__jaali--foot { top: auto; bottom: 0; height: 16%; -webkit-mask-image: none; mask-image: none; }
+.env__jaali--foot::after { top: 0; bottom: auto; }
+.env__flap { transition: transform 1.15s cubic-bezier(.55,.05,.35,1), opacity .4s ease .7s; backface-visibility: hidden; filter: drop-shadow(0 3px 5px rgba(0,0,0,.35)); }
+.env__flap--left { transform-origin: 0 50%; }
+.env__flap--right { transform-origin: 100% 50%; }
+.env__cord { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.cord { fill: none; stroke: url(#gold); stroke-width: 4.2; stroke-linecap: round; }
+.cord__band .cord, .cord__bow .cord { filter: drop-shadow(0 1px 1px rgba(40,25,0,.6)); }
+.cord__band { transition: transform .9s cubic-bezier(.6,0,.4,1), opacity .6s ease .3s; }
+.cord__bow { transform-box: view-box; transform-origin: 176px 290px; transition: transform .8s cubic-bezier(.5,0,.5,1), opacity .5s ease .25s; }
+.cord__tip { animation: tip 1.4s ease-in-out infinite alternate; }
+@keyframes tip { to { r: 6; fill: #fff3c0; } }
+.env__open { position: absolute; inset: 0; z-index: 5; background: none; border: 0; color: #fff6e6; cursor: grab; display: grid; align-items: end; justify-items: center; padding-bottom: calc(6vh + env(safe-area-inset-bottom)); font: inherit; }
+.env__open .eyebrow { padding: 10px 22px; border-radius: 999px; background: rgba(10,30,12,.6); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); animation: breathe 1.6s ease-in-out infinite alternate; }
 @keyframes breathe { to { opacity: .55; } }
+/* pull: cord slides off, bow unties, flaps open, card rises and fills the screen */
 .gate.is-opening .env__open { pointer-events: none; opacity: 0; transition: opacity .3s; }
-.gate.is-opening .env__ribbon { transform: scaleY(0); opacity: 0; }
-.gate.is-opening .env__bow { transform: translate(-50%, 30%) scale(.5) rotate(-12deg); opacity: 0; }
-.gate.is-opening .env__flap--top    { transform: rotateX(-172deg); transition-delay: .55s; }
-.gate.is-opening .env__flap--left   { transform: rotateY(172deg);  transition-delay: .72s; }
-.gate.is-opening .env__flap--right  { transform: rotateY(-172deg); transition-delay: .72s; }
-.gate.is-opening .env__flap--bottom { transform: rotateX(172deg);  transition-delay: .88s; }
-.gate.is-opening .env__card { transform: scale(1.18); opacity: 0; }
+.gate.is-opening .cord__band { transform: translateX(130%); opacity: 0; }
+.gate.is-opening .cord__bow { transform: translate(90px, 60px) scale(.3) rotate(40deg); opacity: 0; }
+.gate.is-opening .env__flap--left  { transform: rotateY(-165deg); transition-delay: .6s; }
+.gate.is-opening .env__flap--right { transform: rotateY(165deg);  transition-delay: .75s; }
+.gate.is-opening .env__card { transform: translateY(-8%) scale(1.04); transition-delay: 1.2s, 2.1s; }
+.gate.is-opening .env { transform: translateY(4vh) scale(1.35); transition-delay: 1.9s; }
+.gate.is-opening .env__back { opacity: 0; transition: opacity .6s ease 1.6s; }
 .route__btn { margin-top: 18px; display: grid; gap: 14px; justify-items: center; background: none; border: 0; color: inherit; cursor: pointer; text-decoration: none; font: inherit; }
 .gate__ring { width: 96px; height: 96px; border-radius: 50%; border: 1.5px solid rgba(244,233,212,.9); display: grid; place-items: center; transition: transform .4s cubic-bezier(.2,.8,.2,1); }
 .route__btn:hover .gate__ring { transform: scale(1.08); }
@@ -202,7 +206,8 @@ body:not(.locked) .music { opacity: 1; pointer-events: auto; }
 
 @media (prefers-reduced-motion: reduce) {
   .lantern, .gate__dot, .scroll-cue, .env__open .eyebrow { animation: none; }
-  .env__flap, .env__ribbon, .env__bow, .env__card { transition: none !important; }
+  .env, .env__flap, .cord__band, .cord__bow, .env__card { transition: none !important; }
+  .cord__tip { animation: none; }
   .reveal { transition: none; opacity: 1; transform: none; }
   [data-speed] { transform: none !important; }
 }
