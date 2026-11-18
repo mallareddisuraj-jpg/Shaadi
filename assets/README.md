@@ -25,10 +25,9 @@ Keep JPGs under about 500 KB each so the invite opens quickly on phones.
 
 ## What is here now
 
-Built from the two Canva designs (scene motifs, and the block-print patterns with linen cartouches):
-`sky.jpg`, `dome.png`, `palace.jpg`, `courtyard.jpg`, the four `pattern-*.jpg`, the four `cartouche-*.png`
-(maroon is tinted from the beige one), `carved-frame.png` (the jharokha arch), `arch-scene.jpg` (peacocks and
-lotus shown inside the arch until `couple.jpg` is added), `teal-paper.jpg`, `rose-texture.jpg` and `damask.jpg`
-(recoloured from the Canva watercolour wash and trellis), and `share.jpg`.
+The art comes from the designer's Canva file, rebuilt piece by piece from its pages at full resolution:
+`cover.jpg` (page 2), `ev-checkin.jpg` (page 15), `ev-welcome.jpg` (page 20), `ev-haldi.jpg` (page 19),
+`ev-wedding.jpg` (page 13), `sky.jpg` (the night sky behind the opening screen) and `share.jpg`.
+`teal-paper.jpg` and `rose-texture.jpg` are recoloured from the Canva watercolour wash.
 
-Still to add: `couple.jpg`, `ganesh.png`, `music.mp3`.
+Still to add: `couple.jpg` (the photo section appears once it exists), `ganesh.png`, `music.mp3`.

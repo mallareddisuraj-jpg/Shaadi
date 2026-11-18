@@ -56,10 +56,11 @@
   }, { threshold: 0.15 });
   document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
-  /* ---------- Hide the dashed guide once the carved frame art exists ---------- */
+  /* ---------- Photo section shows only once assets/couple.jpg exists ---------- */
+  const photo = document.getElementById("photo");
   const probe = new Image();
-  probe.onload = () => document.querySelector(".carved")?.classList.add("has-frame");
-  probe.src = "assets/carved-frame.png";
+  probe.onload = () => { if (photo) { photo.hidden = false; photo.querySelectorAll(".reveal").forEach((el) => io.observe(el)); } };
+  probe.src = "assets/couple.jpg";
 
   /* ---------- Music: assets/music.mp3 (button hides itself if the file is missing) ---------- */
   const btn = document.getElementById("music");
