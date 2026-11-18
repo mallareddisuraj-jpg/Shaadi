@@ -23,6 +23,26 @@
     }
   });
 
+  /* ---------- Footer: rain streaks and dust motes ---------- */
+  const rain = document.querySelector(".fs__rain");
+  if (rain) for (let i = 0; i < 26; i++) {
+    const d = document.createElement("i");
+    d.style.left = `${(rand() * 100).toFixed(1)}%`;
+    d.style.setProperty("--d", `${(0.9 + rand() * 0.8).toFixed(2)}s`);
+    d.style.setProperty("--delay", `${(-rand() * 2).toFixed(2)}s`);
+    d.style.opacity = (0.35 + rand() * 0.5).toFixed(2);
+    rain.appendChild(d);
+  }
+  const motes = document.querySelector(".fs__motes");
+  if (motes) for (let i = 0; i < 10; i++) {
+    const m = document.createElement("i");
+    m.style.left = `${(rand() * 100).toFixed(1)}%`; m.style.top = `${(rand() * 100).toFixed(1)}%`;
+    m.style.setProperty("--d", `${(6 + rand() * 5).toFixed(1)}s`);
+    m.style.setProperty("--delay", `${(-rand() * 8).toFixed(1)}s`);
+    m.style.setProperty("--dx", `${Math.round((rand() - 0.5) * 50)}px`);
+    motes.appendChild(m);
+  }
+
   /* ---------- Parallax ---------- */
   const layers = [...document.querySelectorAll("[data-speed]")];
   let ticking = false;
@@ -83,7 +103,7 @@
   const gate = document.getElementById("gate");
   document.getElementById("openInvite").addEventListener("click", () => {
     play();
-    gate.classList.add("is-opening");                 // ribbon slips off, flaps fold open, card grows
+    gate.classList.add("is-opening");                 // seal lifts, flaps fold open, card grows
     setTimeout(() => {
       gate.classList.add("is-open");                  // then the envelope fades into the cover
       document.body.classList.remove("locked");
