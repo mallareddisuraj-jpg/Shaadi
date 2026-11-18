@@ -47,15 +47,11 @@ section { position: relative; overflow: hidden; }
 .cv { position: absolute; display: block; will-change: transform; backface-visibility: hidden; }
 .cv--sky { animation: sky-drift 24s ease-in-out infinite alternate; transform-origin: 50% 40%; }
 @keyframes sky-drift { from { transform: scale(1); } to { transform: scale(1.0035) translateX(-.06%); } }
-/* Four plants move in the wind: the banana fan with the parrot, the tall cone, the top fern and the hanging willow.
-   The rest barely stir (a tenth of the movement). The gust travels left to right. */
-.cv--banana  { transform-origin: 35% 100%; animation: lean 3s cubic-bezier(.45,.05,.35,1) .1s infinite;  --lean: -1.8deg; }
+/* Only three plants move in the wind: the tall cone, the top fern and the hanging willow. The left side and the
+   bottom grove stay completely still. The gust travels left to right. */
 .cv--cone    { transform-origin: 50% 100%; animation: lean 3s cubic-bezier(.45,.05,.35,1) .3s infinite;  --lean: -1.6deg; }
 .cv--fern    { transform-origin: 85% 0;    animation: lean 3s cubic-bezier(.45,.05,.35,1) .5s infinite;  --lean: 2.2deg; }
 .cv--willow  { transform-origin: 70% 0;    animation: lean 3s cubic-bezier(.45,.05,.35,1) .62s infinite; --lean: 2deg; }
-.cv--cypress { transform-origin: 30% 100%; animation: lean 3s cubic-bezier(.45,.05,.35,1) 0s infinite;   --lean: -.11deg; }
-.cv--lotus   { transform-origin: 50% 100%; animation: lean 3s cubic-bezier(.45,.05,.35,1) .22s infinite; --lean: -.3deg; }
-.cv--grove   { transform-origin: 50% 100%; animation: lean 3s cubic-bezier(.45,.05,.35,1) .35s infinite; --lean: -.1deg; }
 @keyframes lean {
   0%   { transform: skewX(0deg); }
   38%  { transform: skewX(var(--lean)); }
