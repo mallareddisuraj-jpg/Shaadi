@@ -80,11 +80,15 @@
   btn.addEventListener("click", () => (audio.paused ? play() : audio.pause()));
 
   /* ---------- Gate ---------- */
+  const gate = document.getElementById("gate");
   document.getElementById("openInvite").addEventListener("click", () => {
     play();
-    document.getElementById("gate").classList.add("is-open");
-    document.body.classList.remove("locked");
-    window.scrollTo(0, 0);
-    document.querySelectorAll(".scene--sky .reveal").forEach((el) => el.classList.add("in"));
+    gate.classList.add("is-opening");                 // ribbon slips off, flaps fold open, card grows
+    setTimeout(() => {
+      gate.classList.add("is-open");                  // then the envelope fades into the cover
+      document.body.classList.remove("locked");
+      window.scrollTo(0, 0);
+      document.querySelectorAll(".scene--sky .reveal").forEach((el) => el.classList.add("in"));
+    }, reduceMotion ? 0 : 2900);
   });
 })();

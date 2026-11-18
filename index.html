@@ -26,18 +26,37 @@
     </filter>
   </svg>
 
-  <!-- Opening gate: the tap also starts the music (browsers need a tap before audio) -->
+  <!-- Opening: a ribbon-tied envelope printed with the designer's golden page. The tap also starts the music. -->
   <div class="gate" id="gate">
-    <div class="art art--sky" aria-hidden="true"></div>
-    <div class="lanterns" data-count="14" aria-hidden="true"></div>
-    <div class="gate__inner">
-      <p class="eyebrow">You are invited</p>
-      <p class="gate__names">Harini <span>&amp;</span> Suraj</p>
-      <button class="gate__btn" id="openInvite" type="button">
-        <span class="gate__ring"><span class="gate__dot"></span></span>
-        <span class="eyebrow">Tap to open</span>
-      </button>
+    <div class="env" aria-hidden="true">
+      <div class="env__card">
+        <p class="eyebrow">You are invited</p>
+        <p class="env__names">Harini <span>&amp;</span> Suraj</p>
+        <p class="eyebrow">26 · 27 November 2027 · Bengaluru</p>
+      </div>
+      <div class="env__flap env__flap--left"><i></i></div>
+      <div class="env__flap env__flap--right"><i></i></div>
+      <div class="env__flap env__flap--bottom"><i></i></div>
+      <div class="env__flap env__flap--top"><i></i></div>
+      <div class="env__ribbon"></div>
+      <svg class="env__bow" viewBox="0 0 220 170">
+        <defs>
+          <linearGradient id="satin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffaf0"/><stop offset=".45" stop-color="#f1e5c9"/><stop offset=".7" stop-color="#fff8ea"/><stop offset="1" stop-color="#d9c79f"/></linearGradient>
+          <radialGradient id="seal" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#a8323f"/><stop offset=".7" stop-color="#7a1f2b"/><stop offset="1" stop-color="#5a141e"/></radialGradient>
+        </defs>
+        <g fill="url(#satin)" stroke="#c9b48a" stroke-width="1.2" stroke-linejoin="round">
+          <path d="M110 62 C80 20 18 18 22 52 C25 82 76 80 110 70 Z"/>
+          <path d="M110 62 C140 20 202 18 198 52 C195 82 144 80 110 70 Z"/>
+          <path d="M104 72 C92 104 74 132 58 160 L80 156 L86 168 C100 136 108 106 112 76 Z"/>
+          <path d="M116 72 C128 104 146 132 162 160 L140 156 L134 168 C120 136 112 106 108 76 Z"/>
+        </g>
+        <path d="M44 46 C64 40 88 52 104 62 M176 46 C156 40 132 52 116 62" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="110" cy="68" r="27" fill="url(#seal)" stroke="#5a141e" stroke-width="1.5"/>
+        <circle cx="110" cy="68" r="21" fill="none" stroke="#d99a8f" stroke-opacity=".55" stroke-width="1" stroke-dasharray="2 3"/>
+        <text x="110" y="74" text-anchor="middle" font-family="Cinzel, serif" font-size="15" fill="#f6d9c9" letter-spacing="1">H&amp;S</text>
+      </svg>
     </div>
+    <button class="env__open" id="openInvite" type="button"><span class="eyebrow">Tap to open</span></button>
   </div>
 
   <main>
@@ -55,7 +74,7 @@
     </section>
 
     <!-- 04 · Invitation card -->
-    <section class="card">
+    <section class="card textured">
       <div class="art art--paper" aria-hidden="true"></div>
       <div class="card__inner">
         <p class="deva reveal">ॐ श्री गणेशाय नमः</p>
@@ -72,7 +91,7 @@
     </section>
 
     <!-- 05 · Couple photo -->
-    <section class="photo" id="photo" hidden>
+    <section class="photo textured" id="photo" hidden>
       <div class="art art--rose" aria-hidden="true"></div>
       <figure class="carved reveal">
         <img class="couple" src="assets/couple.jpg" alt="Harini and Suraj">
@@ -80,23 +99,23 @@
     </section>
 
     <!-- 06 · Celebrations: one panel per event, the designer's framed scene with the details beneath -->
-    <section class="events-intro">
+    <section class="events-intro textured">
       <div class="art art--paper" aria-hidden="true"></div>
       <header class="events__head reveal">
         <p class="eyebrow">Two days of celebration</p>
         <h2 class="heading">The Celebrations</h2>
       </header>
     </section>
-    <section class="event event--welcome">
-      <figure class="event__scene reveal"><img src="assets/ev-checkin.jpg" alt="The palace lawn" loading="lazy" decoding="async"></figure>
+    <section class="textured event event--welcome">
+      <figure class="event__scene reveal"><img src="assets/ev-checkin.webp" alt="The palace lawn" loading="lazy" decoding="async"></figure>
       <div class="event__text reveal">
         <p class="eyebrow">Friday · 26 November</p>
         <h3 class="event__name">Check-in &amp; High Tea</h3>
         <p class="eyebrow event__time">6:00 PM</p>
       </div>
     </section>
-    <section class="event event--dinner">
-      <figure class="event__scene reveal"><img src="assets/ev-welcome.jpg" alt="The night garden" loading="lazy" decoding="async"></figure>
+    <section class="textured event event--dinner">
+      <figure class="event__scene reveal"><img src="assets/ev-welcome.webp" alt="The night garden" loading="lazy" decoding="async"></figure>
       <div class="event__text reveal">
         <p class="eyebrow">Friday · 26 November</p>
         <h3 class="event__name">Welcome Reception</h3>
@@ -104,8 +123,8 @@
         <p class="event__note">Followed by dinner</p>
       </div>
     </section>
-    <section class="event event--haldi">
-      <figure class="event__scene reveal"><img src="assets/ev-haldi.jpg" alt="The courtyard" loading="lazy" decoding="async"></figure>
+    <section class="textured event event--haldi">
+      <figure class="event__scene reveal"><img src="assets/ev-haldi.webp" alt="The courtyard" loading="lazy" decoding="async"></figure>
       <div class="event__text reveal">
         <p class="eyebrow">Saturday · 27 November</p>
         <h3 class="event__name">Haldi</h3>
@@ -113,8 +132,8 @@
         <p class="event__note">Followed by lunch</p>
       </div>
     </section>
-    <section class="event event--wedding">
-      <figure class="event__scene reveal"><img src="assets/ev-wedding.jpg" alt="The lotus pavilion" loading="lazy" decoding="async"></figure>
+    <section class="textured event event--wedding">
+      <figure class="event__scene reveal"><img src="assets/ev-wedding.webp" alt="The lotus pavilion" loading="lazy" decoding="async"></figure>
       <div class="event__text reveal">
         <p class="eyebrow">Saturday · 27 November</p>
         <h3 class="event__name">Shubh Vivaah</h3>
@@ -124,7 +143,7 @@
     </section>
 
     <!-- 07 · See the route -->
-    <section class="route">
+    <section class="route textured">
       <div class="art art--paper" aria-hidden="true"></div>
       <div class="route__inner reveal">
         <h2 class="heading">See the Route</h2>
@@ -137,7 +156,7 @@
     </section>
 
     <!-- 08 · Closing -->
-    <section class="closing">
+    <section class="closing textured">
       <div class="lanterns" data-count="9" aria-hidden="true"></div>
       <div class="closing__inner reveal">
         <p class="body">We can’t wait to celebrate with you</p>
