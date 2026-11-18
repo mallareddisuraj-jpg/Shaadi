@@ -108,6 +108,7 @@
     gate.classList.add("is-opening");                 // cord slides off, flaps open, card rises
     setTimeout(() => {
       gate.classList.add("is-open");                  // then the envelope fades into the cover
+      document.body.classList.add("cover-live");      // shooting stars start once the cover shows
       document.body.classList.remove("locked");
       window.scrollTo(0, 0);
       document.querySelectorAll(".scene--sky .reveal").forEach((el) => el.classList.add("in"));
