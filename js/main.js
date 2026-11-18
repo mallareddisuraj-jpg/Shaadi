@@ -1,5 +1,4 @@
 (() => {
-  const PLAYLIST_ID = "OLAK5uy_nmYXVCudQpXrnQW8eqGMLWjKii1mLfxe8";
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- Lanterns ---------- */
@@ -62,39 +61,22 @@
   probe.onload = () => document.querySelector(".carved")?.classList.add("has-frame");
   probe.src = "assets/carved-frame.png";
 
-  /* ---------- Music (YouTube playlist) ---------- */
+  /* ---------- Music: assets/music.mp3 (button hides itself if the file is missing) ---------- */
   const btn = document.getElementById("music");
   const label = btn.querySelector(".music__label");
-  let player = null, ready = false, wantPlay = false;
-
+  const audio = new Audio("assets/music.mp3");
+  audio.loop = true; audio.preload = "auto"; audio.volume = 0.7;
+  let hasAudio = true;
+  audio.addEventListener("error", () => { hasAudio = false; btn.hidden = true; });
   const setPlaying = (on) => {
     btn.classList.toggle("is-playing", on);
     btn.setAttribute("aria-pressed", String(on));
     label.textContent = on ? "Pause music" : "Play music";
   };
-  const play = () => {
-    if (!ready) { wantPlay = true; return; }
-    try { player.unMute(); player.setVolume(70); player.playVideo(); } catch (e) {}
-  };
-
-  window.onYouTubeIframeAPIReady = () => {
-    player = new YT.Player("yt", {
-      width: "1", height: "1",
-      playerVars: { listType: "playlist", list: PLAYLIST_ID, playsinline: 1, controls: 0, loop: 1 },
-      events: {
-        onReady: () => { ready = true; if (wantPlay) play(); },
-        onStateChange: (e) => setPlaying(e.data === YT.PlayerState.PLAYING),
-      },
-    });
-  };
-  const s = document.createElement("script");
-  s.src = "https://www.youtube.com/iframe_api";
-  document.head.appendChild(s);
-
-  btn.addEventListener("click", () => {
-    if (btn.classList.contains("is-playing")) { try { player.pauseVideo(); } catch (e) {} }
-    else play();
-  });
+  audio.addEventListener("play", () => setPlaying(true));
+  audio.addEventListener("pause", () => setPlaying(false));
+  const play = () => { if (hasAudio) audio.play().catch(() => {}); };
+  btn.addEventListener("click", () => (audio.paused ? play() : audio.pause()));
 
   /* ---------- Gate ---------- */
   document.getElementById("openInvite").addEventListener("click", () => {
