@@ -60,18 +60,19 @@ section { position: relative; overflow: hidden; }
   72%  { transform: skewX(calc(var(--lean) * -.18)); }
   100% { transform: skewX(0deg); }
 }
-/* Shooting stars: the first streaks across a second after the cover appears, then one every 4 seconds, in 5 spots */
-.stars { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+/* Shooting stars, behind the plants: the first crosses a second after the cover appears, then one every 4 seconds, in 5 spots; each takes about 2 seconds */
+.stars { position: absolute; inset: 0; pointer-events: none; }
+.cv--stars { pointer-events: none; }
 .stars i { position: absolute; width: 130px; height: 1.6px; border-radius: 2px; opacity: 0; transform-origin: 100% 50%;
   background: linear-gradient(90deg, rgba(255,255,255,0), rgba(220,235,255,.55) 70%, #fff); filter: drop-shadow(0 0 4px rgba(200,225,255,.8)); }
 .stars i::after { content: ""; position: absolute; right: -2px; top: 50%; width: 4px; height: 4px; margin-top: -2px; border-radius: 50%; background: #fff; box-shadow: 0 0 8px 2px rgba(210,230,255,.9); }
 body.cover-live .stars i { animation: shoot 20s linear var(--d) infinite; }
 @keyframes shoot {
   0%    { opacity: 0; transform: rotate(var(--a)) translateX(0) scaleX(.4); }
-  .6%   { opacity: 1; }
-  3.6%  { opacity: 1; transform: rotate(var(--a)) translateX(150px) scaleX(1); }
-  4.6%  { opacity: 0; transform: rotate(var(--a)) translateX(210px) scaleX(.6); }
-  100%  { opacity: 0; transform: rotate(var(--a)) translateX(210px) scaleX(.6); }
+  1.5%  { opacity: 1; }
+  7.5%  { opacity: 1; transform: rotate(var(--a)) translateX(170px) scaleX(1); }
+  9.5%  { opacity: 0; transform: rotate(var(--a)) translateX(230px) scaleX(.6); }
+  100%  { opacity: 0; transform: rotate(var(--a)) translateX(230px) scaleX(.6); }
 }
 /* faint wind streaks that pass with each gust */
 .cover__wind { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
