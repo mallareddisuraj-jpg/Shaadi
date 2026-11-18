@@ -23,26 +23,6 @@
     }
   });
 
-  /* ---------- Footer: rain streaks and dust motes ---------- */
-  const rain = document.querySelector(".fs__rain");
-  if (rain) for (let i = 0; i < 26; i++) {
-    const d = document.createElement("i");
-    d.style.left = `${(rand() * 100).toFixed(1)}%`;
-    d.style.setProperty("--d", `${(0.9 + rand() * 0.8).toFixed(2)}s`);
-    d.style.setProperty("--delay", `${(-rand() * 2).toFixed(2)}s`);
-    d.style.opacity = (0.35 + rand() * 0.5).toFixed(2);
-    rain.appendChild(d);
-  }
-  const motes = document.querySelector(".fs__motes");
-  if (motes) for (let i = 0; i < 10; i++) {
-    const m = document.createElement("i");
-    m.style.left = `${(rand() * 100).toFixed(1)}%`; m.style.top = `${(rand() * 100).toFixed(1)}%`;
-    m.style.setProperty("--d", `${(6 + rand() * 5).toFixed(1)}s`);
-    m.style.setProperty("--delay", `${(-rand() * 8).toFixed(1)}s`);
-    m.style.setProperty("--dx", `${Math.round((rand() - 0.5) * 50)}px`);
-    motes.appendChild(m);
-  }
-
   /* ---------- Parallax ---------- */
   const layers = [...document.querySelectorAll("[data-speed]")];
   let ticking = false;
@@ -76,11 +56,10 @@
   }, { threshold: 0.15 });
   document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
-  /* ---------- Photo section shows only once assets/couple.jpg exists ---------- */
-  const photo = document.getElementById("photo");
+  /* ---------- Hide the dashed guide once the carved frame art exists ---------- */
   const probe = new Image();
-  probe.onload = () => { if (photo) { photo.hidden = false; photo.querySelectorAll(".reveal").forEach((el) => io.observe(el)); } };
-  probe.src = "assets/couple.jpg";
+  probe.onload = () => document.querySelector(".carved")?.classList.add("has-frame");
+  probe.src = "assets/carved-frame.png";
 
   /* ---------- Music: assets/music.mp3 (button hides itself if the file is missing) ---------- */
   const btn = document.getElementById("music");
@@ -100,15 +79,11 @@
   btn.addEventListener("click", () => (audio.paused ? play() : audio.pause()));
 
   /* ---------- Gate ---------- */
-  const gate = document.getElementById("gate");
   document.getElementById("openInvite").addEventListener("click", () => {
     play();
-    gate.classList.add("is-opening");                 // seal lifts, flaps fold open, card grows
-    setTimeout(() => {
-      gate.classList.add("is-open");                  // then the envelope fades into the cover
-      document.body.classList.remove("locked");
-      window.scrollTo(0, 0);
-      document.querySelectorAll(".scene--sky .reveal").forEach((el) => el.classList.add("in"));
-    }, reduceMotion ? 0 : 2900);
+    document.getElementById("gate").classList.add("is-open");
+    document.body.classList.remove("locked");
+    window.scrollTo(0, 0);
+    document.querySelectorAll(".scene--sky .reveal").forEach((el) => el.classList.add("in"));
   });
 })();
