@@ -204,3 +204,5 @@ body:not(.locked) .music { opacity: 1; pointer-events: auto; }
   .reveal { transition: none; opacity: 1; transform: none; }
   [data-speed] { transform: none !important; }
 }
+
+.music[hidden] { display: none; }
