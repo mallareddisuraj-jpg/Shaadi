@@ -22,3 +22,14 @@ Drop your files into this folder with exactly these names. Each section shows a 
 | `share.jpg` | Preview image shown when the link is shared on WhatsApp | 1200×630 |
 
 Keep JPGs under about 500 KB each so the invite opens quickly on phones.
+
+## What is here now
+
+The art comes from the designer's Canva file, rebuilt piece by piece from its pages at full resolution:
+`cover.jpg` (page 2), `ev-checkin.jpg` (page 15), `ev-welcome.jpg` (page 20), `ev-haldi.jpg` (page 19),
+`ev-wedding.jpg` (page 13), `envelope.jpg` (page 3, printed on the opening envelope), `sky.jpg` and `share.jpg`.
+The `ev-*.webp` files are the same scenes with the page colour made transparent, so the kolam texture runs up to the frame.
+`kolam.svg`, `kolam-maroon.svg` and `rangoli.svg` are drawn for this site: the faint pattern and rosettes on the coloured backgrounds.
+`teal-paper.jpg` and `rose-texture.jpg` are recoloured from the Canva watercolour wash.
+
+Still to add: `couple.jpg` (the photo section appears once it exists), `ganesh.png`, `music.mp3`.

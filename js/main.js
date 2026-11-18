@@ -56,10 +56,11 @@
   }, { threshold: 0.15 });
   document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
-  /* ---------- Hide the dashed guide once the carved frame art exists ---------- */
+  /* ---------- Photo section shows only once assets/couple.jpg exists ---------- */
+  const photo = document.getElementById("photo");
   const probe = new Image();
-  probe.onload = () => document.querySelector(".carved")?.classList.add("has-frame");
-  probe.src = "assets/carved-frame.png";
+  probe.onload = () => { if (photo) { photo.hidden = false; photo.querySelectorAll(".reveal").forEach((el) => io.observe(el)); } };
+  probe.src = "assets/couple.jpg";
 
   /* ---------- Music: assets/music.mp3 (button hides itself if the file is missing) ---------- */
   const btn = document.getElementById("music");
@@ -79,11 +80,15 @@
   btn.addEventListener("click", () => (audio.paused ? play() : audio.pause()));
 
   /* ---------- Gate ---------- */
+  const gate = document.getElementById("gate");
   document.getElementById("openInvite").addEventListener("click", () => {
     play();
-    document.getElementById("gate").classList.add("is-open");
-    document.body.classList.remove("locked");
-    window.scrollTo(0, 0);
-    document.querySelectorAll(".scene--sky .reveal").forEach((el) => el.classList.add("in"));
+    gate.classList.add("is-opening");                 // ribbon slips off, flaps fold open, card grows
+    setTimeout(() => {
+      gate.classList.add("is-open");                  // then the envelope fades into the cover
+      document.body.classList.remove("locked");
+      window.scrollTo(0, 0);
+      document.querySelectorAll(".scene--sky .reveal").forEach((el) => el.classList.add("in"));
+    }, reduceMotion ? 0 : 2900);
   });
 })();
