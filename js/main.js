@@ -96,6 +96,61 @@
     else play();
   });
 
+  /* ---------- RSVP: a formatted reply opens in WhatsApp ---------- */
+  // The family's WhatsApp number, digits only with country code (e.g. "919876543210").
+  // Left empty, WhatsApp opens with the reply ready and the guest picks who to send it to.
+  const RSVP_TO = "";
+  const sheet = document.getElementById("rsvpSheet");
+  const openSheet = () => { sheet.showModal(); document.body.classList.add("sheet-open"); };
+  const closeSheet = () => sheet.close();
+  document.getElementById("openRsvp")?.addEventListener("click", openSheet);
+  document.getElementById("closeRsvp")?.addEventListener("click", closeSheet);
+  sheet?.addEventListener("close", () => document.body.classList.remove("sheet-open"));
+  sheet?.addEventListener("click", (e) => { if (e.target === sheet) closeSheet(); });   // tap outside the panel
+  const form = document.getElementById("rsvpForm");
+  if (form) {
+    const more = document.getElementById("rsvpMore");
+    const err = document.getElementById("rsvpError");
+    const out = document.getElementById("guests");
+    const thanks = document.getElementById("rsvpThanks");
+    let guests = 1;
+    form.addEventListener("change", (e) => {
+      if (e.target.name === "attending") more.hidden = e.target.value !== "yes";
+    });
+    form.querySelectorAll("[data-step]").forEach((b) => b.addEventListener("click", () => {
+      guests = Math.min(10, Math.max(1, guests + Number(b.dataset.step))); out.textContent = guests;
+    }));
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const f = new FormData(form);
+      const name = (f.get("name") || "").trim();
+      const attending = f.get("attending");
+      const fail = (msg) => { err.textContent = msg; err.hidden = false; };
+      if (!name) return fail("Please add your name.");
+      if (!attending) return fail("Please let us know if you can join us.");
+      const events = f.getAll("events");
+      if (attending === "yes" && !events.length) return fail("Please pick at least one celebration.");
+      err.hidden = true;
+      const lines = [`RSVP · Harini & Suraj`, ``, `Name: ${name}`];
+      if (f.get("phone")) lines.push(`Phone: ${f.get("phone").trim()}`);
+      if (attending === "yes") {
+        lines.push(`Joyfully accepts`, `Guests: ${guests}`, `Celebrations: ${events.join(", ")}`,
+          `Food: ${f.get("food")}`, `Arriving: ${f.get("arrival")}`, `Room at the venue: ${f.get("stay")}`);
+        if (f.get("notes")) lines.push(`Allergies / notes: ${f.get("notes").trim()}`);
+      } else {
+        lines.push(`Regretfully declines`);
+      }
+      if (f.get("message")) lines.push(``, `Message: ${f.get("message").trim()}`);
+      const text = encodeURIComponent(lines.join("\n"));
+      window.open(`https://wa.me/${RSVP_TO}?text=${text}`, "_blank", "noopener");
+      document.getElementById("rsvpThanksText").textContent = attending === "yes"
+        ? `We can’t wait to celebrate with you${guests > 1 ? ` and your ${guests - 1 === 1 ? "guest" : `${guests - 1} guests`}` : ""}.`
+        : "We’ll miss you, and we’ll be thinking of you on the day.";
+      form.hidden = true; thanks.hidden = false;
+    });
+    document.getElementById("rsvpAgain").addEventListener("click", () => { thanks.hidden = true; form.hidden = false; });
+  }
+
   /* ---------- Gate ---------- */
   const gate = document.getElementById("gate");
   const opener = document.getElementById("openInvite");

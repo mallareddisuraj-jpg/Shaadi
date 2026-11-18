@@ -243,19 +243,19 @@ body:not(.locked) .music { opacity: 1; pointer-events: auto; }
 [hidden] { display: none !important; }
 
 /* ---------- Textures: kolam pattern and paper grain on every coloured background ---------- */
-.textured { isolation: isolate; }
+.textured { isolation: auto; }
 .textured::before, .textured::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0; }
 .textured::before { background: url("../assets/kolam.svg") center top / 132px repeat; opacity: .075; }
 .textured::after {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   opacity: .22; mix-blend-mode: soft-light;
 }
-.textured > * { position: relative; z-index: 1; }
+.textured > * { position: relative; z-index: 4; }
 .textured > .art, .textured > .lanterns { position: absolute; }
-.textured > .art { z-index: -1; }
-.textured > .lanterns { z-index: 2; }
+.textured > .art { z-index: 0; }
+.textured > .lanterns { z-index: 1; }
 /* A faint rangoli rosette behind the section headings */
-.events__head::before, .route__inner::before, .closing__inner::before {
+.events__head::before, .route__inner::before {
   content: ""; position: absolute; left: 50%; top: 50%; width: min(440px, 112vw); aspect-ratio: 1;
   transform: translate(-50%, -50%); background: url("../assets/rangoli.svg") center / contain no-repeat;
   opacity: .12; z-index: -1; pointer-events: none;
@@ -266,3 +266,126 @@ body:not(.locked) .music { opacity: 1; pointer-events: auto; }
   transform: translate(-50%, -50%); background: url("../assets/rangoli.svg") center / contain no-repeat;
   opacity: .09; z-index: -1; pointer-events: none;
 }
+
+/* ==========================================================================
+   One palette, seamless joins, motifs that cross from one section into the next
+   ========================================================================== */
+:root {
+  --night: #13233f;   /* the cover's night sky */
+  --indigo: #1d2d4f;
+  --plum: #46285a;
+  --olive: #575d25;
+  --saffron: #e3a44a;
+  --ivory: #f4ead6;
+}
+/* each section has its own solid colour */
+.card, .photo, .events-intro, .event, .route, .closing {
+  background: var(--bg);
+  overflow-x: clip; overflow-y: visible;
+}
+.card           { --prev: var(--night);  --bg: var(--indigo); }
+.photo          { --prev: var(--indigo); --bg: var(--indigo); }
+.events-intro   { --prev: var(--indigo); --bg: var(--plum); }
+.event--welcome { --prev: var(--plum);   --bg: var(--plum);  --ink: var(--ivory); }
+.event--dinner  { --prev: var(--plum);   --bg: var(--night); --ink: var(--ivory); }
+.event--haldi   { --prev: var(--night);  --bg: var(--olive); --ink: var(--ivory); }
+.event--wedding { --prev: var(--olive);  --bg: var(--plum);  --ink: var(--ivory); }
+.route          { --prev: var(--plum);   --bg: var(--indigo); }
+.closing        { --prev: var(--indigo); --bg: #0d1a30; }
+.eyebrow { color: inherit; }
+.divider { stroke: var(--saffron); }
+
+.scene--sky { overflow-x: clip; overflow-y: visible; z-index: 3; }
+@media (max-aspect-ratio: 3/4) { .cover { background: var(--night); } }
+
+/* motifs placed across the joins */
+.textured > .deco { position: absolute; z-index: 1; pointer-events: none; display: block; height: auto; }
+.deco--marigold { top: -11vh; width: min(40vw, 230px); filter: drop-shadow(0 10px 16px rgba(0,0,0,.35)); }
+.deco--marigold-l { left: -12vw; rotate: -14deg; }
+.deco--marigold-r { right: -14vw; top: -7vh; width: min(34vw, 200px); rotate: 22deg; }
+/* each event's framed scene rises a little into the section above */
+.event { overflow-x: clip; overflow-y: visible; padding-bottom: 15vh; }
+.textured > .event__scene { margin-top: -10vh; position: relative; z-index: 1; }
+.event--haldi .event__scene { margin-top: -4vh; }
+/* the closing lanterns drift up over the end of the RSVP */
+.closing .lanterns { top: -24vh; }
+.events-intro { padding-top: 22vh; }
+
+/* ---------- RSVP ---------- */
+.rsvp__head { display: grid; gap: 12px; justify-items: center; text-align: center; }
+.rsvp__card { width: min(520px, 100%); display: grid; gap: 22px; padding: 30px 22px 26px; border-radius: 18px; color: #3a2231;
+  background: #f6efdf url("../assets/kolam-maroon.svg") center / 120px; box-shadow: 0 24px 50px rgba(0,0,0,.35), inset 0 0 0 1px rgba(227,164,74,.6), inset 0 0 0 7px #f6efdf, inset 0 0 0 8px rgba(122,31,43,.25); position: relative; isolation: isolate; }
+.rsvp__card::before { content: ""; position: absolute; inset: 0; border-radius: inherit; background: rgba(246,239,223,.92); z-index: -1; }
+.field { display: grid; gap: 8px; border: 0; margin: 0; padding: 0; min-width: 0; }
+.field__label { font-family: var(--serif-caps); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: #7a1f2b; padding: 0; }
+.field input[type=text], .field input[type=tel], .field textarea {
+  font: 400 19px/1.4 var(--serif); color: #2b1a24; background: transparent; border: 0; border-bottom: 1.5px solid #c9a35a; padding: 6px 2px; border-radius: 0; outline: none; width: 100%; resize: vertical; }
+.field input:focus, .field textarea:focus { border-bottom-color: #7a1f2b; }
+.field input::placeholder, .field textarea::placeholder { color: #a08e7a; font-style: italic; }
+.choice { display: flex; flex-wrap: wrap; gap: 8px; }
+.choice input { position: absolute; opacity: 0; pointer-events: none; }
+.choice label { cursor: pointer; }
+.choice span { display: inline-flex; flex-direction: column; padding: 10px 16px; border-radius: 999px; border: 1.5px solid #c9a35a; font: 500 16px/1.2 var(--serif); color: #4a2a38; transition: background .25s, color .25s, border-color .25s; }
+.choice input:checked + span { background: var(--plum); border-color: var(--plum); color: var(--ivory); }
+.choice input:focus-visible + span { outline: 2px solid #7a1f2b; outline-offset: 2px; }
+.choice--pair label { flex: 1 1 140px; } .choice--pair span { text-align: center; align-items: center; font-size: 17px; font-style: italic; }
+.choice--list { display: grid; gap: 8px; } .choice--list span { border-radius: 12px; padding: 12px 16px; }
+.choice--list small { font-family: var(--serif-caps); font-size: 10px; letter-spacing: .16em; opacity: .75; margin-top: 3px; }
+.field--row { grid-template-columns: 1fr auto; align-items: center; }
+.stepper { display: flex; align-items: center; gap: 4px; border: 1.5px solid #c9a35a; border-radius: 999px; padding: 3px; }
+.stepper button { width: 36px; height: 36px; border-radius: 50%; border: 0; background: transparent; font: 400 22px/1 var(--serif); color: #7a1f2b; cursor: pointer; }
+.stepper button:active { background: rgba(122,31,43,.1); }
+.stepper output { min-width: 26px; text-align: center; font: 500 20px var(--serif); color: #2b1a24; }
+.rsvp__more { display: grid; gap: 22px; }
+.rsvp__send { margin-top: 4px; padding: 15px 20px; border-radius: 999px; border: 1.5px solid var(--saffron); background: var(--plum); color: var(--ivory);
+  font: 500 13px var(--serif-caps); letter-spacing: .3em; text-transform: uppercase; cursor: pointer; box-shadow: 0 8px 18px rgba(70,40,90,.35); }
+.rsvp__send:active { transform: translateY(1px); }
+.rsvp__fine { font-size: 14px; font-style: italic; text-align: center; color: #7d6a5a; }
+.rsvp__error { color: #9b1c2c; font-style: italic; text-align: center; }
+.rsvp__thanks { width: min(520px, 100%); text-align: center; display: grid; gap: 14px; justify-items: center; padding: 34px 22px; border-radius: 18px; background: rgba(244,234,214,.08); border: 1px solid rgba(227,164,74,.5); }
+.rsvp__again { background: none; border: 0; color: var(--saffron); font: italic 17px var(--serif); text-decoration: underline; cursor: pointer; }
+
+/* the lotuses rise from behind the RSVP card's top corners */
+.rsvp__lotus { position: absolute; bottom: calc(100% - 46px); width: 62px; height: auto; z-index: -2; pointer-events: none; }
+.rsvp__lotus--l { left: -8px; }
+.rsvp__lotus--r { right: -8px; transform: scaleX(-1); }
+.rsvp__head { margin-bottom: 64px; }
+
+/* ---------- Route: map and RSVP side by side ---------- */
+.route__actions { display: flex; justify-content: center; gap: clamp(28px, 10vw, 64px); flex-wrap: wrap; }
+.route__btn { margin-top: 10px; }
+.ring--rsvp span { font: 500 15px var(--serif-caps); letter-spacing: .12em; color: var(--ivory); }
+.route__btn:hover .ring--rsvp, .route__btn:focus-visible .ring--rsvp { background: rgba(227,164,74,.12); }
+.ring--rsvp { animation: ring-glow 2.4s ease-in-out infinite alternate; }
+@keyframes ring-glow { from { box-shadow: 0 0 0 0 rgba(227,164,74,0); } to { box-shadow: 0 0 22px 2px rgba(227,164,74,.28); } }
+
+/* ---------- RSVP panel ---------- */
+.rsvp-sheet { padding: 0; border: 0; margin: 0; background: transparent; width: 100%; height: 100%; max-width: none; max-height: none; overflow: hidden; color: var(--ivory); }
+.rsvp-sheet::backdrop { background: rgba(6,12,26,.7); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
+.rsvp-sheet__inner { position: absolute; left: 0; right: 0; bottom: 0; max-height: 92vh; max-height: 92dvh; overflow-y: auto; overscroll-behavior: contain;
+  display: grid; justify-items: center; gap: 0; padding: 28px 16px calc(30px + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, var(--indigo), var(--night)); border-radius: 24px 24px 0 0; box-shadow: 0 -18px 50px rgba(0,0,0,.45);
+  animation: sheet-up .5s cubic-bezier(.2,.8,.2,1); }
+.rsvp-sheet__inner::before { content: ""; position: absolute; inset: 0; background: url("../assets/kolam.svg") center top / 132px repeat; opacity: .06; pointer-events: none; border-radius: inherit; }
+.rsvp-sheet__inner > * { position: relative; }
+@keyframes sheet-up { from { transform: translateY(100%); } to { transform: none; } }
+@media (min-width: 700px) {
+  .rsvp-sheet__inner { left: 50%; right: auto; bottom: 50%; width: 560px; transform: translate(-50%, 50%); border-radius: 24px; max-height: 90vh; animation: sheet-in .4s ease; }
+  @keyframes sheet-in { from { opacity: 0; } to { opacity: 1; } }
+}
+.rsvp-sheet__close { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(244,234,214,.5);
+  background: rgba(244,234,214,.06); color: var(--ivory); font: 300 26px/1 var(--serif); cursor: pointer; z-index: 2; }
+body.sheet-open { overflow: hidden; }
+@media (prefers-reduced-motion: reduce) { .rsvp-sheet__inner { animation: none; } .ring--rsvp { animation: none; } }
+
+/* Route: compact, the map and RSVP rings close together */
+.route { height: auto; min-height: 0; padding: 14vh 24px 16vh; }
+.route__inner { gap: 16px; }
+.route__actions { gap: 22px; margin-top: 6px; }
+.route__btn { margin-top: 0; gap: 10px; }
+
+/* a marigold toran: its rope sits on the line between the card and "The Celebrations", strands hang into the plum */
+.textured > .deco--toran { top: -16px; left: 50%; width: min(100%, 720px); transform: translateX(-50%); }
+.events-intro { padding-top: 46vh; }
+
+/* text always sits above the decorations, including ones reaching in from a neighbouring section */

@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Tiro+Devanagari+Sanskrit&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=202611190253">
+  <link rel="stylesheet" href="css/style.css?v=202611190319">
 </head>
 <body class="locked">
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -100,7 +100,6 @@
 
     <!-- 04 · Invitation card -->
     <section class="card textured">
-      <div class="art art--paper" aria-hidden="true"></div>
       <div class="card__inner">
         <p class="deva reveal">ॐ श्री गणेशाय नमः</p>
         <div class="art art--ganesh reveal" role="img" aria-label="Lord Ganesha"></div>
@@ -125,7 +124,7 @@
 
     <!-- 06 · Celebrations: one panel per event, the designer's framed scene with the details beneath -->
     <section class="events-intro textured">
-      <div class="art art--paper" aria-hidden="true"></div>
+      <img class="deco deco--toran" src="assets/deco-toran.webp" alt="" aria-hidden="true">
       <header class="events__head reveal">
         <p class="eyebrow">Two days of celebration</p>
         <h2 class="heading">The Celebrations</h2>
@@ -149,6 +148,8 @@
       </div>
     </section>
     <section class="textured event event--haldi">
+      <img class="deco deco--marigold deco--marigold-l" src="assets/deco-marigold.webp" alt="" aria-hidden="true">
+      <img class="deco deco--marigold deco--marigold-r" src="assets/deco-marigold.webp" alt="" aria-hidden="true">
       <figure class="event__scene reveal"><img src="assets/ev-haldi.webp" alt="The courtyard" loading="lazy" decoding="async"></figure>
       <div class="event__text reveal">
         <p class="eyebrow">Saturday · 27 February</p>
@@ -169,14 +170,19 @@
 
     <!-- 07 · See the route -->
     <section class="route textured">
-      <div class="art art--paper" aria-hidden="true"></div>
       <div class="route__inner reveal">
         <h2 class="heading">See the Route</h2>
         <p class="body">Le Roma Samsara, Mitganahalli, Chagalahatti, Bengaluru 562149</p>
-        <a class="route__btn" href="https://maps.app.goo.gl/3obsquyuHtbwUPwj8" target="_blank" rel="noopener">
-          <span class="gate__ring"><span class="gate__dot"></span></span>
-          <span class="eyebrow">Tap to open the map</span>
-        </a>
+        <div class="route__actions">
+          <a class="route__btn" href="https://maps.app.goo.gl/3obsquyuHtbwUPwj8" target="_blank" rel="noopener">
+            <span class="gate__ring"><span class="gate__dot"></span></span>
+            <span class="eyebrow">Open the map</span>
+          </a>
+          <button class="route__btn" type="button" id="openRsvp" aria-haspopup="dialog">
+            <span class="gate__ring ring--rsvp"><span>RSVP</span></span>
+            <span class="eyebrow">Kindly respond</span>
+          </button>
+        </div>
       </div>
     </section>
 
@@ -191,12 +197,101 @@
     </section>
   </main>
 
+  <!-- RSVP: opens from the route section; replies go to the family on WhatsApp (number set in js/main.js) -->
+  <dialog class="rsvp-sheet" id="rsvpSheet" aria-labelledby="rsvpTitle">
+    <div class="rsvp-sheet__inner">
+      <button class="rsvp-sheet__close" type="button" id="closeRsvp" aria-label="Close">×</button>
+      <header class="rsvp__head">
+        <p class="eyebrow">Kindly respond</p>
+        <h2 class="heading" id="rsvpTitle">RSVP</h2>
+      </header>
+        <form class="rsvp__card reveal" id="rsvpForm" novalidate>
+          <img class="rsvp__lotus rsvp__lotus--l" src="assets/deco-lotus-a.webp" alt="" aria-hidden="true">
+          <img class="rsvp__lotus rsvp__lotus--r" src="assets/deco-lotus-b.webp" alt="" aria-hidden="true">
+          <label class="field">
+            <span class="field__label">Your name</span>
+            <input name="name" type="text" autocomplete="name" placeholder="Full name" required>
+          </label>
+          <label class="field">
+            <span class="field__label">Phone</span>
+            <input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+91">
+          </label>
+          <fieldset class="field">
+            <legend class="field__label">Will you join us?</legend>
+            <div class="choice choice--pair">
+              <label><input type="radio" name="attending" value="yes" required><span>Joyfully accept</span></label>
+              <label><input type="radio" name="attending" value="no"><span>Regretfully decline</span></label>
+            </div>
+          </fieldset>
+          <div class="rsvp__more" id="rsvpMore" hidden>
+            <fieldset class="field">
+              <legend class="field__label">Which celebrations?</legend>
+              <div class="choice choice--list">
+                <label><input type="checkbox" name="events" value="Check-in & High Tea" checked><span>Check-in &amp; High Tea <small>Fri 26 Feb · 6:00 PM</small></span></label>
+                <label><input type="checkbox" name="events" value="Welcome Reception" checked><span>Welcome Reception <small>Fri 26 Feb · 7:00 PM</small></span></label>
+                <label><input type="checkbox" name="events" value="Haldi" checked><span>Haldi <small>Sat 27 Feb · 10:00 AM</small></span></label>
+                <label><input type="checkbox" name="events" value="Shubh Vivaah" checked><span>Shubh Vivaah <small>Sat 27 Feb · 4:30 PM</small></span></label>
+              </div>
+            </fieldset>
+            <div class="field field--row">
+              <span class="field__label">Guests, including you</span>
+              <div class="stepper">
+                <button type="button" data-step="-1" aria-label="Fewer guests">−</button>
+                <output name="guests" id="guests">1</output>
+                <button type="button" data-step="1" aria-label="More guests">+</button>
+              </div>
+            </div>
+            <fieldset class="field">
+              <legend class="field__label">Food preference</legend>
+              <div class="choice choice--chips">
+                <label><input type="radio" name="food" value="Vegetarian" checked><span>Vegetarian</span></label>
+                <label><input type="radio" name="food" value="Non-vegetarian"><span>Non-veg</span></label>
+                <label><input type="radio" name="food" value="Jain"><span>Jain</span></label>
+                <label><input type="radio" name="food" value="Vegan"><span>Vegan</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field">
+              <legend class="field__label">Arriving on</legend>
+              <div class="choice choice--chips">
+                <label><input type="radio" name="arrival" value="Thu 25 Feb"><span>Thu 25</span></label>
+                <label><input type="radio" name="arrival" value="Fri 26 Feb" checked><span>Fri 26</span></label>
+                <label><input type="radio" name="arrival" value="Sat 27 Feb"><span>Sat 27</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field">
+              <legend class="field__label">Will you need a room at the venue?</legend>
+              <div class="choice choice--chips">
+                <label><input type="radio" name="stay" value="Yes" checked><span>Yes, please</span></label>
+                <label><input type="radio" name="stay" value="No"><span>No, thank you</span></label>
+              </div>
+            </fieldset>
+            <label class="field">
+              <span class="field__label">Allergies or anything we should know</span>
+              <input name="notes" type="text" placeholder="Optional">
+            </label>
+          </div>
+          <label class="field">
+            <span class="field__label">A note for Harini &amp; Suraj</span>
+            <textarea name="message" rows="3" placeholder="Optional"></textarea>
+          </label>
+          <p class="rsvp__error" id="rsvpError" role="alert" hidden></p>
+          <button class="rsvp__send" type="submit"><span>Send RSVP</span></button>
+          <p class="rsvp__fine">Your reply opens in WhatsApp, ready to send to the family.</p>
+        </form>
+        <div class="rsvp__thanks" id="rsvpThanks" hidden>
+          <p class="heading">Thank you</p>
+          <p class="body" id="rsvpThanksText">We can’t wait to celebrate with you.</p>
+          <button type="button" class="rsvp__again" id="rsvpAgain">Change my reply</button>
+        </div>
+    </div>
+  </dialog>
+
   <div class="yt" aria-hidden="true"><div id="yt"></div></div>
   <button class="music" id="music" type="button" aria-pressed="false">
     <span class="music__bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
     <span class="music__label">Play music</span>
   </button>
 
-  <script src="js/main.js?v=202611190253"></script>
+  <script src="js/main.js?v=202611190319"></script>
 </body>
 </html>
