@@ -389,3 +389,12 @@ body.sheet-open { overflow: hidden; }
 .events-intro { padding-top: 46vh; }
 
 /* text always sits above the decorations, including ones reaching in from a neighbouring section */
+
+/* the cover's stars twinkle, each on its own rhythm */
+.cv--stars .tw { opacity: var(--o); transform-box: fill-box; transform-origin: center; animation: twinkle var(--tw) ease-in-out var(--td) infinite; }
+@keyframes twinkle {
+  0%, 100% { opacity: var(--o); transform: scale(1); }
+  45%      { opacity: calc(var(--o) * .3); transform: scale(.78); }
+  60%      { opacity: calc(var(--o) * .45); transform: scale(.86); }
+}
+@media (prefers-reduced-motion: reduce) { .cv--stars .tw { animation: none; } }
