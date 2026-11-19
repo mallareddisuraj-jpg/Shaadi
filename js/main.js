@@ -99,7 +99,7 @@
   /* ---------- RSVP: a formatted reply opens in WhatsApp ---------- */
   // The family's WhatsApp number, digits only with country code (e.g. "919876543210").
   // Left empty, WhatsApp opens with the reply ready and the guest picks who to send it to.
-  const RSVP_TO = "";
+  const RSVP_TO = "919937759242";
   const sheet = document.getElementById("rsvpSheet");
   const openSheet = () => { sheet.showModal(); document.body.classList.add("sheet-open"); };
   const closeSheet = () => sheet.close();
